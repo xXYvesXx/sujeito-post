@@ -1,12 +1,17 @@
 <template>
-  <div id="perfil"><h1>Perfil</h1></div>
+  <div id="perfil">
+      <h1>Pagina Perfil</h1>
+  </div>
 </template>
 
 <script>
+
 export default {
-  name: "perfil",
-};
+  name: 'Perfil',
+
+}
 </script>
 
-<style>
+<style scoped>
+
 </style>
