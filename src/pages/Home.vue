@@ -18,7 +18,7 @@
     <div class="postarea" v-else>
       <article class="post" v-for="post in posts" :key="post.id">
         <h1>{{ post.autor }}</h1>
-        <p>{{ post.content }}</p>
+        <p>{{ post.content | postLength }}</p>
         <div class="action-post">
           <button>
             {{ post.likes === 0 ? "Like" : post.likes + " Likes" }}
@@ -90,6 +90,15 @@ export default {
         .catch((error) => {
           console.log("Error ao criar o post: " + error);
         });
+    },
+  },
+  filters: {
+    postLength(valor) {
+      if (valor.length < 200) {
+        return valor;
+      }
+
+      return `${valor.substring(0, 200)}...`;
     },
   },
 };
