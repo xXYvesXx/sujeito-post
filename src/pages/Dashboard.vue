@@ -6,32 +6,31 @@
 </template>
 
 <script>
-import firebase from '../services/firebaseConnection'
+import firebase from "../services/firebaseConnection";
 
 export default {
-  name: 'Dashboard',
-  data(){
-    return{
-
-    }
+  name: "Dashboard",
+  data() {
+    return {};
   },
-  methods:{
-    async logOut(){
-      const confirm = window.confirm('Você realmente deseja sair?')
+  methods: {
+    async logOut() {
+      const confirm = window.confirm("Você realmente deseja sair?");
 
-      if(confirm){
-        await firebase.auth().signOut()
-        .then(()=>{
-          await localStorage.removeItem('devpost')
-          this.$router.push('/login')
-        })
-      }else{
-        return
+      if (confirm) {
+        await firebase
+          .auth()
+          .signOut()
+          .then(async () => {
+            await localStorage.removeItem("devpost");
+            this.$router.push("/login");
+          });
+      } else {
+        return;
       }
-      }
-    }
-  }
-
+    },
+  },
+};
 </script>
 
 <style scoped>
