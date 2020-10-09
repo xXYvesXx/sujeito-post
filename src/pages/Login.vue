@@ -51,11 +51,11 @@ export default {
       await firebase
         .firestore()
         .collection("users")
-        .doc(
-          user.uid.set({
-            nome: this.nome,
-          })
-        )
+        .doc(user.uid)
+        .set({
+          nome: this.nome,
+        })
+
         .then(async () => {
           const usuarioLogado = {
             uid: user.uid,

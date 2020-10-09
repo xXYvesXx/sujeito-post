@@ -3,13 +3,14 @@ import 'firebase/firestore'
 import 'firebase/auth'
 
 let firebaseConfig = {
-  apiKey: 'AIzaSyCpfLpQrInumU93esIfpipugEY40foqVYQ',
-  authDomain: 'sujeitopost-84885.firebaseapp.com',
-  databaseURL: 'https://sujeitopost-84885.firebaseio.com',
-  projectId: 'sujeitopost-84885',
-  storageBucket: 'sujeitopost-84885.appspot.com',
-  messagingSenderId: '178127585270',
-  appId: '1:178127585270:web:679356ee310934e10491d7',
+  apiKey: 'AIzaSyAoBaWc03-ecdHRTO0ffIG-onBWOV4msgM',
+  authDomain: 'sujeito-f03f7.firebaseapp.com',
+  databaseURL: 'https://sujeito-f03f7.firebaseio.com',
+  projectId: 'sujeito-f03f7',
+  storageBucket: 'sujeito-f03f7.appspot.com',
+  messagingSenderId: '935653356671',
+  appId: '1:935653356671:web:cf53d8accf26a35e3ebb4a',
+  measurementId: 'G-ZZK2MQR8QG',
 }
 
 if (!firebase.apps.length) {
