@@ -1,5 +1,6 @@
 <template>
   <div id="login">
+    <!--Form de Login-->
     <div class="loginArea" v-if="login">
       <h1>Entrar</h1>
       <form @submit.prevent="handleLogin">
@@ -9,7 +10,7 @@
       </form>
       <a @click="toggleBtn">Criar uma conta</a>
     </div>
-
+    <!--Form de Cadastro-->
     <div class="loginArea" v-else>
       <h1>Cadastrar</h1>
       <form @submit.prevent="handleRegister">
@@ -43,6 +44,7 @@ export default {
       this.password = "";
     },
 
+    //função de register
     async handleRegister() {
       const { user } = await firebase
         .auth()
@@ -71,6 +73,7 @@ export default {
       this.$router.push("/");
     },
 
+    //função de Login
     async handleLogin() {
       const { user } = await firebase
         .auth()
@@ -88,7 +91,7 @@ export default {
         nome: userProfile.data().nome,
       };
 
-      await localStorage.setItem("devopost", JSON.stringify(usuarioLogado));
+      await localStorage.setItem("devpost", JSON.stringify(usuarioLogado));
 
       this.$router.push("/");
     },
