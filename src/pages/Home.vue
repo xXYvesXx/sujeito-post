@@ -51,6 +51,7 @@ export default {
       //está monitorando os posts
       .firestore()
       .collection("posts")
+      .orderBy("created", "desc")
       .onSnapshot((doc) => {
         this.posts = [];
 
