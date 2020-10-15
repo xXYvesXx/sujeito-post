@@ -7,7 +7,10 @@
     <div v-else>
       <div class="headerperfil">
         <h2>Olá {{ nome }}</h2>
-        <span>Já fez <strong>10</strong>posts</span>
+        <span
+          >Já fez <strong>{{ this.posts.length }}</strong
+          >posts</span
+        >
       </div>
 
       <div class="postarea">
@@ -15,19 +18,26 @@
           <h1>{{ post.autor }}</h1>
           <p>{{ post.content }}</p>
           <div class="action-post">
-            <button>Veja post completo</button>
+            <button @click="togglePostModal(post)">Veja post completo</button>
           </div>
         </article>
       </div>
     </div>
+
+    <Modal v-if="showPostModal" :post="fullPost" @close="togglePostModal()">
+    </Modal>
   </div>
 </template>
 
 <script>
 import firebase from "../services/firebaseConnection";
+import Modal from "../components/Modal";
 
 export default {
   name: "Perfil",
+  components: {
+    Modal,
+  },
   data() {
     return {
       loading: true,
@@ -63,9 +73,19 @@ export default {
         });
 
         this.nome = this.posts[0].autor;
+        this.loading = false;
       });
+  },
+  methods: {
+    togglePostModal(post) {
+      this.showPostModal = !this.showPostModal;
 
-    this.loading = false;
+      if (this.showPostModal) {
+        this.fullPost = post;
+      } else {
+        this.fullPost = {};
+      }
+    },
   },
 };
 </script>
