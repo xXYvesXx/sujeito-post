@@ -27,7 +27,8 @@
         </div>
       </article>
     </div>
-    <Modal v-if="showPostModal" :post="fullPost"> </Modal>
+    <Modal v-if="showPostModal" :post="fullPost" @close="togglePostModal()">
+    </Modal>
   </div>
 </template>
 

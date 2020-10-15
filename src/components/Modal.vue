@@ -1,11 +1,17 @@
 <template>
   <div class="modal">
     <div class="container">
-      <a class="close">Voltar</a>
+      <a @click="$emit('close')" class="close">Voltar</a>
       <div>
-        <h2>Matheus</h2>
-        <span> 19 Curtidas </span>
-        <p>Este é o conteúdo do post clickado</p>
+        <h2>{{ post.autor }}</h2>
+        <span v-if="post.likes === 0 ? false : true">
+          {{
+            post.likes === 1
+              ? `${post.likes} Curtida`
+              : `${post.likes} Curtidas`
+          }}
+        </span>
+        <p>{{ post.content }}</p>
       </div>
     </div>
   </div>
@@ -14,6 +20,7 @@
 <script>
 export default {
   name: "Modal",
+  props: ["post"],
 };
 </script>
 
@@ -24,7 +31,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .modal .container {
@@ -46,7 +53,17 @@ export default {
   cursor: pointer;
   background: #121212;
   padding: 4px 15px;
-  top: 10px;
-  left: 10px;
+  top: 15px;
+  left: 15px;
+}
+
+span {
+  font-style: italic;
+  font-weight: bold;
+  color: #121212;
+}
+
+p {
+  white-space: pre-wrap;
 }
 </style>
