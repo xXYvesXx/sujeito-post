@@ -5,11 +5,10 @@
     </div>
 
     <div v-else>
-      <div class="headerperfil">
+      <div class="headerPerfil">
         <h2>Olá {{ nome }}</h2>
         <span
-          >Já fez <strong>{{ this.posts.length }}</strong
-          >posts</span
+          >Já fez <strong>{{ this.posts.length }}</strong> posts</span
         >
       </div>
 
