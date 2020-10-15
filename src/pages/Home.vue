@@ -27,14 +27,19 @@
         </div>
       </article>
     </div>
+    <Modal v-if="showPostModal" :post="fullPost"> </Modal>
   </div>
 </template>
 
 <script>
 import firebase from "../services/firebaseConnection";
+import Modal from "../components/Modal";
 
 export default {
   name: "Home",
+  components: {
+    Modal,
+  },
   data() {
     return {
       input: "",
