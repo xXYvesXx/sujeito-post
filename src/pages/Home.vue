@@ -23,7 +23,7 @@
           <button @click="likePost(post.id, post.likes)">
             {{ post.likes === 0 ? "Like" : post.likes + " Likes" }}
           </button>
-          <button>Veja post completo</button>
+          <button @click="togglePostModal(post)">Veja post completo</button>
         </div>
       </article>
     </div>
@@ -41,6 +41,8 @@ export default {
       user: {},
       loading: true,
       posts: [],
+      showPostModal: false,
+      fullPost: {},
     };
   },
   async created() {
@@ -66,6 +68,7 @@ export default {
           });
         });
         this.loading = false;
+        console.log(this.posts);
       });
   },
   methods: {
@@ -93,44 +96,60 @@ export default {
         });
     },
 
-    likePost(id, likes){
-      const userId = this.user.uid
-      const docId = `${userId}_${id}`
+    async likePost(id, likes) {
+      const userId = this.user.uid;
+      const docId = `${userId}_${id}`;
 
       //Checkando se o post já foi curtido
-      const doc = await firebase.firestore().collection('likes')
-        .doc(docId).get()
+      const doc = await firebase
+        .firestore()
+        .collection("likes")
+        .doc(docId)
+        .get();
 
-        if(doc.exists){
-          await firebase.firestore().collection('posts')
-            .doc(id).update({
-              likes: likes - 1
-            })
+      if (doc.exists) {
+        await firebase
+          .firestore()
+          .collection("posts")
+          .doc(id)
+          .update({
+            likes: likes - 1,
+          });
 
-            await firebase.firestore().collection('likes')
-              .doc(docId).delete()
-              return
-        }
+        await firebase.firestore().collection("likes").doc(docId).delete();
+        return;
+      }
 
-        await firebase.firestore().collection('likes')
-          .doc(docId).set({
-            postId: id,
-            userId: userId
-          })
+      await firebase.firestore().collection("likes").doc(docId).set({
+        postId: id,
+        userId: userId,
+      });
 
+      //Criar o like
+      await firebase
+        .firestore()
+        .collection("posts")
+        .doc(id)
+        .update({
+          likes: likes + 1,
+        });
+    },
 
-        //Criar o like
-        await firebase.firestore().collection('posts')
-          .doc(id).update({
-            likes: likes + 1
-          })
+    togglePostModal(post) {
+      this.showPostModal = !this.showPostModal;
 
-        await 
-    }
+      if (this.showPostModal) {
+        this.fullPost = post;
+      } else {
+        this.fullPost = {};
+      }
+    },
   },
   filters: {
     postLength(valor) {
       if (valor.length < 200) {
+        console.log(valor);
+
         return valor;
       }
 
