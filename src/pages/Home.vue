@@ -17,7 +17,9 @@
 
     <div class="postarea" v-else>
       <article class="post" v-for="post in posts" :key="post.id">
-        <h1>{{ post.autor }}</h1>
+        <router-link tag="h1" :to="`/perfil/${post.userId}`">{{
+          post.autor
+        }}</router-link>
         <p>{{ post.content | postLength }}</p>
         <div class="action-post">
           <button @click="likePost(post.id, post.likes)">
